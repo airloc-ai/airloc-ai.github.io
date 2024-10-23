@@ -51,12 +51,12 @@
 								</ul>
 							</form>
 						</div>
-						<div id="successmsg" hidden><div class="alert alert-success">
+						<div id="successmsg" hidden>
             						<strong>Thank you!</strong> We will be in touch shortly.
-						</div></div>
-						<div id="errormsg" hidden><div class="alert alert-danger">
+						</div>
+						<div id="errormsg" hidden>
 							There was an error sending your message. Please try again.
-						</div></div>
+						</div>
     						<script>
 							const scriptURL = 'https://script.google.com/a/macros/airloc.ai/s/AKfycbxlLjWnVUfcPevA5Wxm-z-d3nx4FnRdMjI4t7Jpzp2-sDTFLrUSxsIt6_6h4HhbbjECpg/exec'
 							const form = document.forms['submit-to-google-sheet']
@@ -67,12 +67,12 @@
 								e.preventDefault()
 								fetch(scriptURL, { method: 'POST', body: new FormData(form)})
 									.then(response => console.log('Success!', response),
-									     successmsg.hidden = false
+									     successmsg.hidden = false,
+									      form.hidden = true
 									     )
 									.catch(error => console.error('Error!', error.message),
 									      errormsg.hidden = false
 									      )
-								form.reset()
 								})
 							</script>
 
