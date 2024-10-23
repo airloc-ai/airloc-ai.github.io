@@ -54,10 +54,14 @@
 						<div id="successmsg" hidden>
             						<p><strong>Thank you</strong>! We will be in touch shortly.</p>
 						</div>
+						<div id="errormsg" hidden>
+            						<p>An error has occurred. Please try again.</p>
+						</div>
     						<script>
 							const scriptURL = 'https://script.google.com/a/macros/airloc.ai/s/AKfycbxlLjWnVUfcPevA5Wxm-z-d3nx4FnRdMjI4t7Jpzp2-sDTFLrUSxsIt6_6h4HhbbjECpg/exec'
 							const form = document.forms['submit-to-google-sheet']
 							const successmsg = document.getElementById('successmsg');
+							const errormsg = document.getElementById('errormsg');
 
 							form.addEventListener('submit', e => {
 								e.preventDefault()
@@ -66,7 +70,10 @@
 									     successmsg.hidden = false,
 									      form.hidden = true
 									     )
-									.catch(error => console.error('Error!', error.message))									      )
+									.catch(error => console.error('Error!', error.message),
+									      errormsg.hidden = true,
+									      form.reset()
+									      )
 								})
 						</script>
 					</section>
