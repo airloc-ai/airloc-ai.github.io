@@ -59,7 +59,7 @@
 									fetch(scriptURL, { method: 'POST', body: new FormData(form)})
 										.then(response => console.log('Success!', response))
 										.catch(error => console.error('Error!', error.message))
-									e.innerHTML = `Thank you ${form.name.value}! We will be in touch shortly.`
+									e.formContainer.innerHTML = `Thank you ${form.name.value}! We will be in touch shortly.`
 								})
 							</script>
 							</font>
