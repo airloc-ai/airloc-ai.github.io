@@ -30,7 +30,6 @@
 				<!-- Contact Form -->
 					<section class="wrapper style1 align-center invert">
 						<div class="inner medium">
-							<font color="#cca677">
 							<h2>Get in touch</h2>
 							<form name="submit-to-google-sheet">
 								<div class="fields">
@@ -51,19 +50,32 @@
 									<li><button type="submit" name="submit" id="submit">Send</button></li>
 								</ul>
 							</form>
-							<script>
-								const scriptURL = 'https://script.google.com/a/macros/airloc.ai/s/AKfycbxlLjWnVUfcPevA5Wxm-z-d3nx4FnRdMjI4t7Jpzp2-sDTFLrUSxsIt6_6h4HhbbjECpg/exec'
-								const form = document.forms['submit-to-google-sheet']
-								form.addEventListener('submit', e => {
-									e.preventDefault()
-									fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-										.then(response => console.log('Success!', response))
-										.catch(error => console.error('Error!', error.message))
-									div.innerHTML = 'Thank you! We will be in touch shortly.'
+						</div>
+						<div id="successmsg" hidden><div class="alert alert-success">
+            						<strong>Thank you!</strong> We will be in touch shortly.
+						</div></div>
+						<div id="errormsg" hidden><div class="alert alert-danger">
+							There was an error sending your message. Please try again.
+						</div></div>
+    						<script>
+							const scriptURL = 'https://script.google.com/a/macros/airloc.ai/s/AKfycbxlLjWnVUfcPevA5Wxm-z-d3nx4FnRdMjI4t7Jpzp2-sDTFLrUSxsIt6_6h4HhbbjECpg/exec'
+							const form = document.forms['submit-to-google-sheet']
+							const successmsg = document.getElementById('successmsg');
+							const errormsg = document.getElementById('errormsg');
+
+							form.addEventListener('submit', e => {
+								e.preventDefault()
+								fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+									.then(response => console.log('Success!', response),
+									     successmsg.hidden = false
+									     )
+									.catch(error => console.error('Error!', error.message),
+									      errormsg.hidden = false
+									      )
+								form.reset()
 								})
 							</script>
-							</font>
-						</div>
+
 					</section>
 
 				<!-- Footer -->
